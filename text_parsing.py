@@ -108,9 +108,6 @@ df["Genre"][1] # now it's a list
 # get top 10 genres and make binary variables to identify the genres a review belongs to
 # Comedy Drama Horror Action Thriller Romance Sci-Fi Fantasy Adventure Documentary...
 
-type(genre["type"][10])
-list(genre["type"][10])
-
 genre_dict = {}
 for row in df["Genre"]:
     
