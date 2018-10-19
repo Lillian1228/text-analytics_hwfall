@@ -25,10 +25,20 @@ df.shape
 # remove rows with missing values in Review column
 df = df.dropna(subset=['Review'])
 df = df.dropna(subset=['Genre'])
-doc = df['Review']
+
 
 df["Rating"].value_counts()
 
+# fix line breaks
+df['Review'][3]
+
+def line_break(x):
+    return x.replace('<br />',' ')
+
+df['Review'] = df['Review'].apply(line_break)
+
+df['Review'][3]
+  
 
 def text_parsing (doc):
     """
@@ -55,6 +65,7 @@ def text_parsing (doc):
 
     # Remove stop words from term vectors
     
+    
     stop_words = nltk.corpus.stopwords.words( 'english' )
     
     for i in range( 0, len( term_vec ) ):
@@ -77,13 +88,15 @@ def text_parsing (doc):
     return term_vec
 
 # Print term vectors with stop words removed
+
+doc = df['Review']
 term_parsed = text_parsing(doc)
 
 len(term_parsed)
 
 df["term_parsed"] = term_parsed
-#df.head()
-#type(df["Genre"][10])
+df.head()
+
 
 
 # Convert the rows in string format of genre column to lists.
@@ -107,6 +120,7 @@ df["Genre"][1] # now it's a list
                                                                                  
 # get top 10 genres and make binary variables to identify the genres a review belongs to
 # Comedy Drama Horror Action Thriller Romance Sci-Fi Fantasy Adventure Documentary...
+
 
 genre_dict = {}
 for row in df["Genre"]:
